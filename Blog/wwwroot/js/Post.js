@@ -17,12 +17,17 @@
 
 let posts = [];
 let modal;
-const BASE_URL = '/api/post';
+const BASE_URL = 'api/post';
 let post = {
     title: "Something for test",
-    text: 'nothing special'
+    text: 'nothing special',
+};
+let smt = {
+    title: 'anotha one',
+    text: 'it is what it is'
 };
 posts.push(post);
+posts.push(smt);
 renderPosts(posts);
 
 class PostApi {
