@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Blog.Controllers
 {
-    [ApiController]
     [Route("api/{controller}")]
     public class PostController : Controller
     {
