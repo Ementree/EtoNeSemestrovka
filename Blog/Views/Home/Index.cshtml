@@ -1,0 +1,56 @@
+﻿<head>
+	<title>Hello React</title>
+	<link type="text/css" rel="stylesheet" href="../../css/Site.css" />
+</head>
+<script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/16.13.0/umd/react.development.js"></script>
+<script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.13.0/umd/react-dom.development.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/remarkable/1.7.1/remarkable.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-bootstrap@next/dist/react-bootstrap.min.js"></script>
+<div id="content"></div>
+<script src="~/js/Post.js"></script>
+
+<div class="container" style="padding-top: 50px;">
+	<div class="row">
+		<div class="col s12 m8 offset-m2 l6 offset-l3" id="posts">
+			<div class="center">
+				<div class="preloader-wrapper small active">
+					<div class="spinner-layer spinner-green-only">
+						<div class="circle-clipper left">
+							<div class="circle"></div>
+						</div>
+						<div class="gap-patch">
+							<div class="circle"></div>
+						</div>
+						<div class="circle-clipper right">
+							<div class="circle"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="fixed-action-btn">
+	<a class="btn-floating btn-large red modal-trigger" data-target="createForm">
+		<i class="large material-icons">add</i>
+	</a>
+</div>
+<div id="createForm" class="modal">
+	<div class="modal-content">
+		<h4>Создать новый пост</h4>
+
+		<div class="input-field">
+			<input id="title" type="text" class="validate" required>
+			<label for="title">Название</label>
+		</div>
+
+		<div class="input-field">
+			<textarea id="text" class="materialize-textarea"></textarea>
+			<label for="text">Текст</label>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<a class="waves-effect waves-light btn" id="createPost">Создать пост</a>
+	</div>
+</div>
