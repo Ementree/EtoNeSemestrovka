@@ -1,0 +1,14 @@
+﻿@model object
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2>title</h2>
+<form asp-action="Create" asp-controller="UploadFile" method="post" enctype="multipart/form-data">
+    <input name="file" type="file" class="form-control" />
+    <p>
+        <input type="submit" value="Добавить" />
+    </p>
+</form>

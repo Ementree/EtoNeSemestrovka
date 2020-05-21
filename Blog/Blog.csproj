@@ -29,4 +29,12 @@
     <PackageReference Include="React.AspNet" Version="5.2.4" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <Content Update="Views\UploadFile\Index.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>
