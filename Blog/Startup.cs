@@ -20,7 +20,6 @@ using JavaScriptEngineSwitcher.Extensions.MsDependencyInjection;
 using JavaScriptEngineSwitcher.ChakraCore;
 using Microsoft.AspNetCore.Http;
 using Blog.Hubs;
-using Blog.Middleware;
 
 namespace Blog
 {
@@ -52,12 +51,11 @@ namespace Blog
             services.AddReact();
             services.AddSignalR();
 
-            //AddTransient is used for Dependency Injection
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<ICategoryRepository, CategoryRepository>();
             services.AddTransient<ICommentRepository, CommentRepository>();
             services.AddTransient<IPostRepository, PostRepository>();
-            services.AddTransient<ILogRepository, LogRepository>();
+            services.AddTransient<IMessageRepository, MessageRepository>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
         }
 
@@ -100,8 +98,6 @@ namespace Blog
 
             app.UseAuthentication();
             app.UseAuthorization();
-
-            app.UseMiddleware<RequestResponseLoggingMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {

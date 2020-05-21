@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 using Blog.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,13 +12,14 @@ namespace Blog.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
+            Database.EnsureCreated();
         }
 
         DbSet<ApplicationUser> ApplicationUsers { get; set; }
         DbSet<Category> Categories { get; set; }
         DbSet<Comment> Comments { get; set; }
         DbSet<Post> Posts { get; set; }
-        DbSet<Log> Logs { get; set; }
+        DbSet<MessageModel> Messages { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -51,6 +51,11 @@ namespace Blog.Data
                 .HasOne(c => c.Post)
                 .WithMany(p => p.Comments)
                 .HasForeignKey(c => c.PostId);
+
+            builder.Entity<MessageModel>()
+                .HasOne<ApplicationUser>(a => a.Sender)
+                .WithMany(d => d.Messages)
+                .HasForeignKey(d => d.UserId);
         }
     }
 }

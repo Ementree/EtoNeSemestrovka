@@ -1,4 +1,5 @@
-﻿using Blog.Interfaces;
+﻿using Blog.Data;
+using Blog.Interfaces;
 using Blog.Models;
 using Microsoft.AspNetCore.SignalR;
 using System;
@@ -10,10 +11,8 @@ namespace Blog.Hubs
 {
     public class ChatHub : Hub
     {
-
-        public async Task SendMessage(string user, string message)
-        {
-            await Clients.All.SendAsync("ReceiveMessage", user, message);
-        }
+        public async Task SendMessage(MessageModel message) =>
+           await Clients.All.SendAsync("receiveMessage", message);
+        
     }
 }

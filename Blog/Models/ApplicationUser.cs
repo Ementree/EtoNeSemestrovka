@@ -15,5 +15,10 @@ namespace Blog.Models
         public ICollection<Post> Posts { get; set; }
         public ICollection<Category> Categories { get; set; }
         public ICollection<Comment> Comments { get; set; }
+        public ICollection<MessageModel> Messages { get; set; }
+        public ApplicationUser()
+        {
+            Messages = new HashSet<MessageModel>();
+        }
     }
 }
