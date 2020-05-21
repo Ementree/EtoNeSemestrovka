@@ -146,6 +146,24 @@ namespace Blog.Migrations
                     b.ToTable("Comments");
                 });
 
+            modelBuilder.Entity("Blog.Models.File", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<byte[]>("ByteFile")
+                        .HasColumnType("bytea");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Files");
+                });
+
             modelBuilder.Entity("Blog.Models.MessageModel", b =>
                 {
                     b.Property<int>("Id")
@@ -185,6 +203,9 @@ namespace Blog.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("integer");
 
+                    b.Property<int?>("FileId")
+                        .HasColumnType("integer");
+
                     b.Property<int>("Rating")
                         .HasColumnType("integer");
 
@@ -200,6 +221,8 @@ namespace Blog.Migrations
                     b.HasKey("PostId");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("FileId");
 
                     b.HasIndex("UserId");
 
@@ -374,6 +397,10 @@ namespace Blog.Migrations
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Blog.Models.File", "File")
+                        .WithMany()
+                        .HasForeignKey("FileId");
 
                     b.HasOne("Blog.Models.ApplicationUser", "ApplicationUser")
                         .WithMany("Posts")

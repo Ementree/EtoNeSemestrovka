@@ -15,11 +15,12 @@ namespace Blog.Data
             Database.EnsureCreated();
         }
 
-        DbSet<ApplicationUser> ApplicationUsers { get; set; }
-        DbSet<Category> Categories { get; set; }
-        DbSet<Comment> Comments { get; set; }
-        DbSet<Post> Posts { get; set; }
-        DbSet<MessageModel> Messages { get; set; }
+        public virtual DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Comment> Comments { get; set; }
+        public virtual DbSet<Post> Posts { get; set; }
+        public virtual DbSet<MessageModel> Messages { get; set; }
+        public virtual DbSet<File> Files { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
