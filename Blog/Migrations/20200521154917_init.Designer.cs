@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Blog.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200521090942_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20200521154917_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -148,25 +148,30 @@ namespace Blog.Migrations
                     b.ToTable("Comments");
                 });
 
-            modelBuilder.Entity("Blog.Models.Log", b =>
+            modelBuilder.Entity("Blog.Models.MessageModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<DateTime>("TimeStamp")
+                    b.Property<string>("Text")
+                        .HasColumnType("text");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("When")
                         .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("request")
-                        .HasColumnType("text");
-
-                    b.Property<string>("response")
-                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Logs");
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Messages");
                 });
 
             modelBuilder.Entity("Blog.Models.Post", b =>
@@ -354,6 +359,13 @@ namespace Blog.Migrations
 
                     b.HasOne("Blog.Models.ApplicationUser", "ApplicationUser")
                         .WithMany("Comments")
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("Blog.Models.MessageModel", b =>
+                {
+                    b.HasOne("Blog.Models.ApplicationUser", "Sender")
+                        .WithMany("Messages")
                         .HasForeignKey("UserId");
                 });
 
